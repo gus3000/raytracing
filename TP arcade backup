@@ -1,0 +1,97 @@
+    //a
+//    auto *circle = new sf::CircleShape(50);
+//    circle->setFillColor(sf::Color(255,180,0));
+//    setPositionCentered(*circle, width/2.,height/2.);
+//    shapes.emplace_back(circle);
+
+    //b
+//    auto *circle = new sf::CircleShape(50);
+//    circle->setFillColor(sf::Color(255, 180, 0));
+//    setPositionCentered(*circle, width / 4., height / 2.);
+//    shapes.emplace_back(circle);
+//
+//    auto *circle2 = new sf::CircleShape(100);
+//    circle2->setFillColor(sf::Color(255, 180, 0));
+//    setPositionCentered(*circle2, width * 0.75, height / 2.);
+//    shapes.emplace_back(circle2);
+
+    //c,d,e
+//    sf::Color colors[] = {
+//        sf::Color(195, 155, 211),
+//        sf::Color(255, 180, 0),
+//        sf::Color(20, 90, 50),
+//    };
+//    for (int i = 0; i < 5; i++) {
+//        for (int j = 0; j < 5; j++) {
+//            auto *circle = new sf::CircleShape(32);
+//            circle->setFillColor(colors[j % 3]);
+//            setPositionCentered(*circle, width * (i + 0.5) / 5., height * (j + 0.5) / 5.);
+//            shapes.emplace_back(circle);
+//        }
+//    }
+
+// exercice 2
+//    const sf::Color ARSENIC(59, 68, 75);
+//    const float tailleCarre = width / 8;
+//    const string ASSETS_FOLDER = "/home/achateauricherd/Git/chess/Sprites/";
+//    const vector<string> pieces = {
+//        "Pawn",
+//        "Rook",
+//        "Knight",
+//        "Bishop",
+//        "Queen",
+//        "King",
+//    };
+//    const string colors[] = {
+//        "white",
+//        "black"
+//    };
+//    vector<vector<float>> positionsX = {
+//        {0, 1, 2, 3, 4, 5, 6, 7},
+//        {0, 7},
+//        {1, 6},
+//        {2, 5},
+//        {3},
+//        {4}
+//    };
+//
+//    for (int i = 0; i < 8; i++) {
+//        for (int j = 0; j < 8; j++) {
+//            auto *square = new sf::RectangleShape({tailleCarre, tailleCarre});
+//            if ((i + j) % 2 == 0)
+//                square->setFillColor(sf::Color::White);
+//            else
+//                square->setFillColor(ARSENIC);
+//            square->setPosition(tailleCarre * i, tailleCarre * j);
+//            shapes.emplace_back(square);
+//        }
+//    }
+//
+////    for (auto &nomPiece : pieces) {
+//    for (int i = 0; i < pieces.size(); i++) {
+//        auto &nomPiece = pieces[i];
+//        for (auto &couleur: colors) {
+//            float x, y;// = couleur == "white" ? 7.5 : 0.5;
+//            if(couleur == "white" && nomPiece == "Pawn")
+//                y = 6;
+//            else if(couleur == "white")
+//                y = 7;
+//            else if(nomPiece == "Pawn")
+//                y = 1;
+//            else
+//                y = 0;
+//            auto *tex = new sf::Texture();
+//            textures.emplace_back(tex);
+//
+//            if (!tex->loadFromFile(ASSETS_FOLDER + couleur + nomPiece + ".png"))
+//                return;
+//
+//            for(auto &position : positionsX[i]) {
+//                auto sprite = new sf::Sprite(*tex);
+////    sprite->setPosition(width / 2, height / 2);
+//                setPositionCentered(*sprite, (position + 0.5) * tailleCarre, (y + 0.5) * tailleCarre);
+//                shapes.emplace_back(sprite);
+//            }
+//
+//        }
+//    }
