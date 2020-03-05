@@ -39,7 +39,7 @@ public:
     template<typename T>
     void setPosition(sf::Vector2<T> v)
     {
-        position = sf::Vector2f{v.x - radius, v.y - radius};
+        position = sf::Vector2f{static_cast<float>(v.x - radius),static_cast<float>(v.y - radius)};
     }
 
     int getRadius() const;

@@ -46,7 +46,7 @@ void MainWindow::handleEvents()
         }
         else if(event.type == sf::Event::MouseMoved)
         {
-            lights[0]->setPosition(sf::Mouse::getPosition());
+            lights[0]->setPosition(sf::Mouse::getPosition(*this));
         }
     }
 }
