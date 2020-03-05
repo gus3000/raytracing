@@ -9,7 +9,11 @@
 #include <SFML/System/Vector2.hpp>
 #include <ostream>
 
-std::ostream &operator<<(std::ostream &o, sf::Vector2f const &v);
+template <typename T>
+std::ostream &operator<<(std::ostream &o, sf::Vector2<T> const &v){
+    o << "{" << v.x << ", " << v.y << "}";
+    return o;
+}
 
 template<typename T>
 sf::Vector2<T> operator*(sf::Vector2<T> const &v, float mul)
