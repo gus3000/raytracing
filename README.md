@@ -1,7 +1,7 @@
 # Raytracing
 This is just a sandbox project, to have fun with SFML and hopefully make a few cool looking effects.
 
-#Dependencies
+# Dependencies
 ## Conan
 This project uses [Conan](https://conan.io/)
 To install it :
