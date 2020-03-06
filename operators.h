@@ -19,12 +19,25 @@ std::ostream &operator<<(std::ostream &o, sf::Vector2<T> const &v){
 template <typename T>
 std::ostream &operator<<(std::ostream &o, std::deque<T> const &d){
     o << "{";
-        for(int i=0; i<d.size(); ++i)
-        {
-            o << d[i];
-            if(i < d.size()-1)
-                o << ", ";
-        }
+    for(int i=0; i<d.size(); ++i)
+    {
+        o << d[i];
+        if(i < d.size()-1)
+            o << ", ";
+    }
+    o << "}";
+    return o;
+}
+
+template <typename T>
+std::ostream &operator<<(std::ostream &o, std::vector<T> const &d){
+    o << "{";
+    for(int i=0; i<d.size(); ++i)
+    {
+        o << d[i];
+        if(i < d.size()-1)
+            o << ", ";
+    }
     o << "}";
     return o;
 }
@@ -41,11 +54,10 @@ sf::Vector2<T> operator*(float mul, sf::Vector2<T> const &v)
     return v * mul;
 }
 
-template<typename T>
-sf::Vector2<T> operator/(sf::Vector2<T> const &v, float div)
-{
-    return {static_cast<T>(v.x / div), static_cast<T>(v.y / div)};
-}
+//sf::Vector2u operator/(sf::Vector2u const &v, float div)
+//{
+//    return {static_cast<unsigned int>(v.x / div), static_cast<unsigned int>(v.y / div)};
+//}
 
 
 #endif //OPERATORS_H

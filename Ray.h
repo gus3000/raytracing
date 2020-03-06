@@ -9,8 +9,7 @@
 #include "Utils.h"
 #include "Line.h"
 
-class Ray : public sf::Drawable
-{
+class Ray : public sf::Drawable {
 protected:
     sf::Vector2f origin;
     sf::Vector2f direction;
@@ -19,26 +18,32 @@ protected:
 
 public:
     Ray() = default;
-    explicit Ray(const int x = 0, const int y = 0, const float angle = 0)
-        : origin(x, y), direction(std::cos(angle), std::sin(angle))
-    {}
 
-    Ray(const int x1, const int y1, const int x2, const int y2)
-        : origin(x1, y1)
-    {
+    explicit Ray(const float x, const float y, const float angle = 0)
+            : origin(x, y), direction(std::cos(angle), std::sin(angle)) {}
+
+    explicit Ray(const sf::Vector2f &origin, const float angle = 0)
+            : Ray(origin.x, origin.y, angle) {}
+
+    Ray(const float x1, const float y1, const float x2, const float y2)
+            : origin(x1, y1) {
         direction = utils::normalize(sf::Vector2f(x2 - x1, y2 - y1));
     }
 
-    const sf::Vector2f &getOrigin() const
-    {
+    Ray(const sf::Vector2f &origin, const sf::Vector2f &direction)
+            : Ray(origin.x, origin.y, direction.x, direction.y) {}
+
+
+    const sf::Vector2f &getOrigin() const {
         return origin;
     }
-    const sf::Vector2f &getDirection() const
-    {
+
+    const sf::Vector2f &getDirection() const {
         return direction;
     }
 
-    std::unique_ptr<sf::Vector2f> cast(const Line &) const;
+    [[nodiscard]] sf::Vector2f* cast(const Line &) const;
+    [[nodiscard]] sf::Vector2f* cast(const Obstacle &) const;
 };
 
 

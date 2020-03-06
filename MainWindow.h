@@ -14,6 +14,9 @@
 #include "Light.h"
 
 class MainWindow : public sf::RenderWindow {
+private:
+    std::deque<float> updates;
+
 protected:
     const int TIME_STEP = 20; // in milliseconds
 

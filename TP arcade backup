@@ -21,8 +21,8 @@
 //        sf::Color(255, 180, 0),
 //        sf::Color(20, 90, 50),
 //    };
-//    for (int i = 0; i < 5; i++) {
-//        for (int j = 0; j < 5; j++) {
+//    for (int i = 0; i < 5; ++i) {
+//        for (int j = 0; j < 5; ++j) {
 //            auto *circle = new sf::CircleShape(32);
 //            circle->setFillColor(colors[j % 3]);
 //            setPositionCentered(*circle, width * (i + 0.5) / 5., height * (j + 0.5) / 5.);
@@ -55,8 +55,8 @@
 //        {4}
 //    };
 //
-//    for (int i = 0; i < 8; i++) {
-//        for (int j = 0; j < 8; j++) {
+//    for (int i = 0; i < 8; ++i) {
+//        for (int j = 0; j < 8; ++j) {
 //            auto *square = new sf::RectangleShape({tailleCarre, tailleCarre});
 //            if ((i + j) % 2 == 0)
 //                square->setFillColor(sf::Color::White);
@@ -68,7 +68,7 @@
 //    }
 //
 ////    for (auto &nomPiece : pieces) {
-//    for (int i = 0; i < pieces.size(); i++) {
+//    for (int i = 0; i < pieces.size(); ++i) {
 //        auto &nomPiece = pieces[i];
 //        for (auto &couleur: colors) {
 //            float x, y;// = couleur == "white" ? 7.5 : 0.5;

@@ -12,14 +12,7 @@
 class Obstacle: public sf::Drawable
 {
 private:
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const override
-    {
-        std::vector<sf::Vertex> vertices;
-        for (auto &p : getPoints()) {
-            vertices.emplace_back(sf::Vertex(p));
-        }
-        target.draw(vertices.data(), vertices.size(), sf::Lines);
-    }
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 protected:
     std::vector<sf::Vector2f> points;
 public:
@@ -28,7 +21,7 @@ public:
         : points(std::move(points))
     {}
 
-    const std::vector<sf::Vector2f> &getPoints() const
+    [[nodiscard]] const std::vector<sf::Vector2f> &getPoints() const
     {
         return points;
     }

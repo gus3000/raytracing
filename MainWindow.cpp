@@ -12,6 +12,40 @@
 using std::string;
 using std::vector;
 
+void MainWindow::init() {
+    updates.clear();
+    obstacles.clear();
+    globalClock.restart();
+    textures.clear();
+    lights.clear();
+
+    //fonts
+    for (auto &fontName : {"arial"}) {
+        auto *font = new sf::Font();
+        if (!font->loadFromFile(utils::FONTS_DIRECTORY + fontName + "/" + fontName + ".ttf")) {
+            this->close();
+        }
+        fonts.insert(std::pair<string, std::unique_ptr<sf::Font>>(fontName, font));
+    }
+
+    // borders
+    const float width = getSize().x;
+    const float height = getSize().y;
+    obstacles.emplace_back(new Line({0, 0}, {width, 0}));
+    obstacles.emplace_back(new Line({width, 0}, {width, height}));
+    obstacles.emplace_back(new Line({width,height}, {0, height}));
+    obstacles.emplace_back(new Line({0, height}, {0, 0}));
+
+    for (int i = 0; i < 4; ++i) {
+        Line line = utils::randomLine(0, 0, getSize().x, getSize().y);
+        std::cout << line << std::endl;
+        this->obstacles.emplace_back(new Line(line));
+    }
+
+    auto *light = new Light(sf::Vector2u{getSize().x / 2, getSize().y / 2});
+    this->lights.emplace_back(light);
+}
+
 void MainWindow::run() {
     int lastUpdate = globalClock.getElapsedTime().asMilliseconds();
     int buf;
@@ -25,6 +59,7 @@ void MainWindow::run() {
         render();
     }
 }
+
 
 void MainWindow::handleEvents() {
     sf::Event event{};
@@ -62,13 +97,28 @@ void MainWindow::render() {
         draw(*obstacle);
     }
     for (auto &light: lights) {
+        light->cast(obstacles);
         draw(*light);
     }
 
-    //show fps
-    sf::Text text(std::to_string(getFPS()), *fonts["arial"], 20);
+//    sf::Vector2i mousePos = sf::Mouse::getPosition(*this);
+//    Ray r(50, 50, mousePos.x, mousePos.y);
+//    sf::Vector2f *impact = r.cast(*obstacles[0]);
+//    Line l(r.getOrigin(), {static_cast<float>(mousePos.x), static_cast<float>(mousePos.y)});
+//    draw(l);
+//    if (impact) {
+//        sf::CircleShape circle(10);
+//        utils::setPositionCentered(circle, *impact);
+//        draw(circle);
+//        delete impact;
+//    }
 
-    draw(text);
+    //show fps
+    sf::Text fpsText(std::to_string(getFPS()), *fonts["arial"], 20);
+    draw(fpsText);
+    sf::Text helpText("Press r to reset", *fonts["arial"], 15);
+    helpText.setPosition(0,getSize().y - helpText.getCharacterSize() - 2);
+    draw(helpText);
 
     display();
 }
@@ -79,38 +129,12 @@ MainWindow::MainWindow(int width, int height, const std::string &title)
     run();
 }
 
-void MainWindow::init() {
-    obstacles.clear();
-    globalClock.restart();
-    textures.clear();
-    lights.clear();
-
-    //fonts
-    for (auto &fontName : {"arial"}) {
-        auto *font = new sf::Font();
-        if(!font->loadFromFile(utils::FONTS_DIRECTORY + fontName + "/" + fontName + ".ttf"))
-        {
-            this->close();
-        }
-        fonts.insert(std::pair<string,std::unique_ptr<sf::Font>>(fontName, font));
-    }
-
-
-    Line line = utils::randomLine(0, 0, getSize().x, getSize().y);
-    std::cout << line << std::endl;
-    this->obstacles.emplace_back(new Line(line));
-
-    auto *light = new Light(getSize() / 2);
-    this->lights.emplace_back(light);
-}
 
 int MainWindow::getFPS() {
-    static std::deque<float> updates;
     updates.push_back(globalClock.getElapsedTime().asSeconds());
 
     float delta;
-    while((delta = updates.back() - updates.front()) > 1 && updates.size() >= 10)
-    {
+    while ((delta = updates.back() - updates.front()) > 1 && updates.size() >= 10) {
         updates.pop_front();
     }
 //    std::cout << updates << std::endl;

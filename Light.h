@@ -11,38 +11,35 @@
 #include <vector>
 
 #include "Utils.h"
+#include "Line.h"
+#include "Obstacle.h"
 
 class Ray;
 
-class Light: public sf::Drawable
-{
+class Light : public sf::Drawable {
 protected:
     sf::Vector2f position;
     std::vector<Ray> rays;
+    std::vector<std::unique_ptr<sf::Vector2f>> impacts;
     int radius;
 
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const override
-    {
-        sf::CircleShape circle(radius);
-        circle.setPosition(position);
-        target.draw(circle);
-    }
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 public:
     template<typename T>
     explicit Light(sf::Vector2<T> position, int radius = 15)
-        : radius(radius)
-    {
+            : radius(radius) {
         setPosition(position);
     }
 
     template<typename T>
-    void setPosition(sf::Vector2<T> v)
-    {
-        position = sf::Vector2f{static_cast<float>(v.x - radius),static_cast<float>(v.y - radius)};
+    void setPosition(sf::Vector2<T> v) {
+        position = sf::Vector2f{static_cast<float>(v.x - radius), static_cast<float>(v.y - radius)};
     }
 
     int getRadius() const;
+
+    void cast(const std::vector<std::unique_ptr<Obstacle>> &obstacles);
 
 };
 

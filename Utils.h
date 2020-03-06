@@ -19,6 +19,7 @@ class Line;
 class Obstacle;
 
 namespace utils {
+    const float EPSILON = FLT_EPSILON * 1000;
     const std::string RESOURCES_DIRECTORY = "res/";
     const std::string FONTS_DIRECTORY = RESOURCES_DIRECTORY + "fonts/";
 
