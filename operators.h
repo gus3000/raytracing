@@ -8,10 +8,24 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <ostream>
+#include <deque>
 
 template <typename T>
 std::ostream &operator<<(std::ostream &o, sf::Vector2<T> const &v){
     o << "{" << v.x << ", " << v.y << "}";
+    return o;
+}
+
+template <typename T>
+std::ostream &operator<<(std::ostream &o, std::deque<T> const &d){
+    o << "{";
+        for(int i=0; i<d.size(); ++i)
+        {
+            o << d[i];
+            if(i < d.size()-1)
+                o << ", ";
+        }
+    o << "}";
     return o;
 }
 
