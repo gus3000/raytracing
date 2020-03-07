@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cmath>
 #include <random>
+#include <limits>
 
 #include "operators.h"
 #include "Light.h"
@@ -19,7 +20,7 @@ class Line;
 class Obstacle;
 
 namespace utils {
-    const float EPSILON = FLT_EPSILON * 1000;
+    const float EPSILON = std::numeric_limits<float>::epsilon() * 1000;
     const std::string RESOURCES_DIRECTORY = "res/";
     const std::string FONTS_DIRECTORY = RESOURCES_DIRECTORY + "fonts/";
 

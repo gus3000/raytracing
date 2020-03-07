@@ -53,9 +53,10 @@ void Light::cast(const std::vector<std::unique_ptr<Obstacle>> &obstacles) {
 
 void Light::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     sf::CircleShape circle(radius);
-    circle.setPosition(position);
+    utils::setPositionCentered(circle,position);
+//    circle.setPosition(position);
     target.draw(circle);
-    sf::Vector2f offsetPosition = {position.x + radius, position.y + radius};
+    sf::Vector2f offsetPosition = {position.x, position.y};
 //    std::cout << impacts << std::endl;
     for (auto &impact : impacts) {
         if (impact != nullptr) {

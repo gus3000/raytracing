@@ -34,7 +34,7 @@ public:
 
     template<typename T>
     void setPosition(sf::Vector2<T> v) {
-        position = sf::Vector2f{static_cast<float>(v.x - radius), static_cast<float>(v.y - radius)};
+        position = sf::Vector2f{static_cast<float>(v.x), static_cast<float>(v.y)};
     }
 
     int getRadius() const;
