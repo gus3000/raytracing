@@ -9,6 +9,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <set>
 
 #include "Utils.h"
 #include "Line.h"
@@ -19,7 +20,7 @@ class Ray;
 class Light : public sf::Drawable {
 protected:
     sf::Vector2f position;
-    std::vector<Ray> rays;
+    std::set<Ray, Orderer> rays;
     std::vector<std::unique_ptr<sf::Vector2f>> impacts;
     int radius;
 

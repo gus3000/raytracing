@@ -19,40 +19,61 @@ class Line;
 
 class Obstacle;
 
-namespace utils {
-    const float EPSILON = std::numeric_limits<float>::epsilon() * 1000;
-    const std::string RESOURCES_DIRECTORY = "res/";
-    const std::string FONTS_DIRECTORY = RESOURCES_DIRECTORY + "fonts/";
+namespace utils
+{
+const float EPSILON = std::numeric_limits<float>::epsilon() * 1000;
 
-    void setPositionCentered(sf::CircleShape &cs, const sf::Vector2f &v);
+const std::string RESOURCES_DIRECTORY = "res/";
 
-    void setPositionCentered(sf::Sprite &s, const sf::Vector2f &v);
+const std::string FONTS_DIRECTORY = RESOURCES_DIRECTORY + "fonts/";
 
-    void setPositionCentered(Obstacle &o, const sf::Vector2f &v);
+// shape stuff
+void setPositionCentered(sf::CircleShape &cs, const sf::Vector2f &v);
+void setPositionCentered(sf::Sprite &s, const sf::Vector2f &v);
+void setPositionCentered(Obstacle &o, const sf::Vector2f &v);
 
-//template<typename T>
-//void setPositionCentered(T &shape, float x, float y)
-//{
-//    utils::setPositionCentered(shape, sf::Vector2f(x, y));
-//}
+// sf::Vector stuff
+template<typename T>
+float dist(sf::Vector2<T> v)
+{
+    return std::hypot(v.x, v.y);
+}
 
-    template<typename T>
-    float dist(sf::Vector2<T> v) {
-        return std::sqrt(v.x * v.x + v.y * v.y);
-    }
+template<typename T>
+float dist(sf::Vector2<T> v1, sf::Vector2<T> v2)
+{
+    float dx = v2.x - v1.x;
+    float dy = v2.y - v1.y;
+    return std::hypot(dx, dy);
 
-    template<typename T>
-    float dist(sf::Vector2<T> v1, sf::Vector2<T> v2) {
-        float dx = v2.x - v1.x;
-        float dy = v2.y - v1.y;
-        return std::sqrt(dx * dx + dy * dy);
-    }
+}
+sf::Vector2f normalize(sf::Vector2f v);
+bool almostEqual(sf::Vector2f v1, sf::Vector2f v2);
+bool almostEqual(const Line &l1, const Line &l2);
+sf::Vector2f randomPoint(float xMin, float yMin, float xMax, float yMax);
 
-    sf::Vector2f normalize(sf::Vector2f v);
+// collection stuff
+template<typename T>
+bool in_array(T key, std::vector<T> array)
+{
+    return std::find(array.begin(), array.end(), key) != array.end();
+}
 
-    sf::Vector2f randomPoint(float xMin, float yMin, float xMax, float yMax);
+bool in_array(sf::Vector2f key, std::vector<sf::Vector2f> array);
+bool in_array(Line key, std::vector<Line> array);
 
-    Line randomLine(float xMin, float yMin, float xMax, float yMax);
+template<typename T>
+bool remove_duplicates(std::vector<T> array)
+{
+    std::vector<T> noDups;
+    for (auto &elem : array)
+        if (!in_array(elem, noDups))
+            noDups.emplace_back(elem);
+    return noDups;
+}
+
+//random stuff
+Line randomLine(float xMin, float yMin, float xMax, float yMax);
 
 }
 

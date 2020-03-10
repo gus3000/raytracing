@@ -33,17 +33,16 @@ public:
     Ray(const sf::Vector2f &origin, const sf::Vector2f &direction)
             : Ray(origin.x, origin.y, direction.x, direction.y) {}
 
-
-    const sf::Vector2f &getOrigin() const {
-        return origin;
-    }
-
-    const sf::Vector2f &getDirection() const {
-        return direction;
-    }
+    [[nodiscard]] const sf::Vector2f &getOrigin() const;
+    [[nodiscard]] const sf::Vector2f &getDirection() const;
+    [[nodiscard]] float getAngle() const;
 
     [[nodiscard]] sf::Vector2f* cast(const Line &) const;
     [[nodiscard]] sf::Vector2f* cast(const Obstacle &) const;
+
+    bool operator==(const Ray &rhs) const;
+    bool operator!=(const Ray &rhs) const;
+
 };
 
 

@@ -29,6 +29,9 @@ public:
     {
         return points[1];
     }
+    [[nodiscard]] virtual sf::Vector2f *intersect(const Obstacle &) const override;
+    [[nodiscard]] virtual sf::Vector2f *intersect(const Line &) const;
+    std::pair<Line,Line> split(sf::Vector2f point);
 
     //friends
     friend std::ostream &operator<<(std::ostream &o, const Line &l);

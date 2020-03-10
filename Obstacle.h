@@ -9,6 +9,8 @@
 #include <SFML/Graphics.hpp>
 #include <utility>
 
+class Line;
+
 class Obstacle: public sf::Drawable
 {
 private:
@@ -30,7 +32,14 @@ public:
     {
         points.emplace_back(p);
     }
+    [[nodiscard]] virtual sf::Vector2f *intersect(const Obstacle &) const = 0;
+
+    [[nodiscard]] std::vector<Line> getLines() const;
 };
+
+std::ostream &operator<<(std::ostream &o, const Obstacle &obstacle);
+std::ostream &operator<<(std::ostream &o, const Obstacle *obstacle);
+std::ostream &operator<<(std::ostream &o, std::unique_ptr<Obstacle> obstacle);
 
 
 #endif //OBSTACLE_H
